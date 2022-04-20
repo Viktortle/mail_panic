@@ -28,7 +28,7 @@ def main():
     while hour < 18 or len(queue) > 0:
         time_pass
         if randint(1,5) == 1:
-            queue.append(Client(f"Client {len(queue) + 1}", random_errands()))
+            queue.append(Client(f"Client {len(total_clients) + 1}", random_errands()))
             total_clients.append(queue[-1])
             total_errands += total_clients[-1].get_errands()
             if len(queue) == 1:
@@ -37,6 +37,12 @@ def main():
             elif serving > 0:
                 print(f"{queue[-1].get_name()} joins the queue as number {len(queue)}.")
         serving -= 1
+        minutes += 1
+        if minutes == 60:
+            minutes = 0
+            hour += 1
+    else:
+        print(f"Total number of errands: {total_errands}\n Total number of clients: {len(total_clients)}")
 
 if __name__ == "__main__":
     main()
