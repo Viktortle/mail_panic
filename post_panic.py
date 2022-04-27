@@ -13,22 +13,22 @@ class Client:
         return self.errands
 
 def random_errands():
-    # Sannolikheten för ärenden
+    # Randomizes number of errands a client has
     number_of_errands = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
     return choice(number_of_errands)
 
-def time_passage(hour, minutes, closing_hour):
-    # Definerar loopens variabler
-    time_pass = sleep(1)
+def time_passage(hour, closing_hour):
+    # Defining the variables for the loop
     queue = []
     total_errands = 0
     total_clients = []
     serving = 0
+    minutes = 0
 
-    # Startar arbetsdagen
+    # Main loop of the program which will 
     while hour < closing_hour or len(queue) > 0:
-        time_pass
-        # Kontrollerar om det kommer någon eller inte och ställer dem i kö
+        sleep(0.2)
+        # Checks if there is a client entering this minute or not as well as putting them in the queue
         if randint(1,5) == 1:
             queue.append(Client(f"Client {len(total_clients) + 1}", random_errands()))
             total_clients.append(queue[-1])
@@ -39,10 +39,10 @@ def time_passage(hour, minutes, closing_hour):
             elif serving > 0:
                 print(f"{queue[-1].get_name()} joins the queue as number {len(queue)}.\n")
 
-        # Kassören arbetar med ärenden
+        # Cashier works on the active errand
         serving -= 1
 
-        # Räkna minuter och timmar
+        # Counts minutes and hours
         minutes += 1
         if minutes == 60:
             minutes = 0
@@ -50,30 +50,33 @@ def time_passage(hour, minutes, closing_hour):
         if hour == 24:
             hour = 0
 
-    # Sammanställer dagens statistik
-    return f"Total number of errands: {total_errands}\n Total number of clients: {len(total_clients)}"
-
+    # Summarize the statistics of the day
+    return f"Total number of errands: {total_errands}\nTotal number of clients: {len(total_clients)}"
 
 def main():
-
     print("Welcome to the mail office!")
     running = True
     hour = 9
-    minutes = 0
     closing_hour = 18
     while running:
 
         choice = input("Would you like to change the opening hour? (y/n)\nEnter here: ")
         if choice == "y":
-            hour = input("What will be the new opening hour?\nEnter here: ")
+            hour = int(input("What will be the new opening hour?\nEnter here: "))
         else: print("The opening hour of the office will be 09:00")
 
-        choice = input("Would you like to change the closing hour? (y/n)\nEnter here: ")
+        choice = input("\nWould you like to change the closing hour? (y/n)\nEnter here: ")
         if choice == "y":
-            closing_hour = input("What will be the new closing hour?\nEnter here: ")
+            closing_hour = int(input("What will be the new closing hour?\nEnter here: "))
         else: print("The closing hour of the office will be 18:00")
 
-        print(time_passage(hour, minutes, closing_hour))
+        print(time_passage(hour, closing_hour))
+
+        choice = input("Do you wish to simulate another day at the office? (y/n)\nEnter here: ")
+        if choice == "n":
+            running = False
+    else:
+        print("See you another time!")
     
 if __name__ == "__main__":
     main()
