@@ -26,18 +26,20 @@ def time_passage(hour, closing_hour):
     minutes = 0
 
     # Main loop of the program which will 
-    while hour < closing_hour or len(queue) > 0:
-        sleep(0.2)
+    while hour < closing_hour or len(queue) > 0 or serving > 0:
+        #sleep(0.14)
+        print(f'\n{hour}:{minutes}:')
         # Checks if there is a client entering this minute or not as well as putting them in the queue
         if randint(1,5) == 1:
             queue.append(Client(f"Client {len(total_clients) + 1}", random_errands()))
             total_clients.append(queue[-1])
             total_errands += total_clients[-1].get_errands()
+
             if len(queue) == 1:
-                print(f"{queue[0].get_name()} was the only one in the queue, they come to the front desk right away.\n")
+                print(f"{queue[0].get_name()} was the only one in the queue, they come to the front desk right away.")
                 serving = queue.pop(0).get_errands() * 2
             elif serving > 0:
-                print(f"{queue[-1].get_name()} joins the queue as number {len(queue)}.\n")
+                print(f"{queue[-1].get_name()} joins the queue as number {len(queue)}.")
 
         # Cashier works on the active errand
         serving -= 1
@@ -56,21 +58,25 @@ def time_passage(hour, closing_hour):
 def main():
     print("Welcome to the mail office!")
     running = True
-    hour = 9
+    opening_hour = 9
     closing_hour = 18
     while running:
 
         choice = input("Would you like to change the opening hour? (y/n)\nEnter here: ")
         if choice == "y":
-            hour = int(input("What will be the new opening hour?\nEnter here: "))
+            opening_hour = int(input("What will be the new opening hour?\nEnter here: "))
+            if opening_hour <= 0 or opening_hour >= 22:
+                opening_hour = int(input("Stop joking and enter an actual hour. . .\nEnter here: "))
         else: print("The opening hour of the office will be 09:00")
 
         choice = input("\nWould you like to change the closing hour? (y/n)\nEnter here: ")
         if choice == "y":
             closing_hour = int(input("What will be the new closing hour?\nEnter here: "))
+            if closing_hour <= 0 or closing_hour >= 24:
+                closing_hour = int(input("Stop joking and enter an actual hour. . .\nEnter here: "))
         else: print("The closing hour of the office will be 18:00")
 
-        print(time_passage(hour, closing_hour))
+        print(time_passage(opening_hour, closing_hour))
 
         choice = input("Do you wish to simulate another day at the office? (y/n)\nEnter here: ")
         if choice == "n":
