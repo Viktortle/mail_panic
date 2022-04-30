@@ -32,11 +32,11 @@ def time_passage(hour, closing_hour):
         
         # Moves the first person in the queue to the front desk to get their errands sorted out
         if serving == 0 and len(queue) > 0:
-            print(f"The cashier finished an errand and moves on to {queue[0].get_name()}'s errands")
+            print(f"The cashier finished an errand and moves on to {queue[0].get_name()}'s errand(s)")
             serving += queue.pop(0).get_errands() * 2
 
         # Checks if there is a client entering this minute or not as well as putting them in the queue
-        if randint(1,5) == 1:
+        if randint(1,5) == 1 and hour < closing_hour:
             queue.append(Client(f"Client {len(total_clients) + 1}", random_errands()))
             total_clients.append(queue[-1])
             total_errands += total_clients[-1].get_errands()
@@ -49,7 +49,7 @@ def time_passage(hour, closing_hour):
 
         # Cashier works on the active errand
         if serving > 0:
-            print(f"{serving} minutes left on errand/s")
+            print(f"{serving} minutes left on errand(s)")
             serving -= 1
 
         # Counts minutes and hours
