@@ -13,11 +13,24 @@ class Client:
         return self.errands
 
 def random_errands():
-    # Randomizes number of errands a client has
-    number_of_errands = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4]
-    return choice(number_of_errands)
+    """Picks a random int from 1~4, weighted
+
+    Returns:
+        int : Random number of errands for client
+    """
+    return choice([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4])
 
 def time_passage(hour, closing_hour):
+    """Loops through a "day" while checking if new clients arrive, their errands and position in the queue. 
+    Loop runs from hour to closing_hour or if serving > 0.
+
+    Args:
+        hour (int): starting value of the loops time
+        closing_hour (int): loop stops when hour reaches this value
+
+    Returns:
+        string: Summarized statistics from the looped "day"
+    """
     # Defining the variables for the loop
     queue = []
     total_errands = 0
@@ -59,13 +72,17 @@ def time_passage(hour, closing_hour):
             hour += 1
         if hour == 24:
             hour = 0
-    
-    else: print("The office is now closed")
+    else: 
+        print("The office is now closed")
 
     # Summarize the statistics of the day
     return f"\nTotal number of errands: {total_errands}\nTotal number of clients: {len(total_clients)}"
 
 def main():
+    """Main function of the program, requests user input for hour and closing_hour. 
+    Prints the results of one full loop through the day.
+    Takes input for running again or not.
+    """
     print("Welcome to the mail office!")
     running = True
     opening_hour = 9
