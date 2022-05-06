@@ -3,6 +3,12 @@ from time import sleep
 
 class Client:
     def __init__(self, name : str, errands : int):
+        """Takes in client name and number of errands
+
+        Args:
+            name (str): sets client name attribute to the name parameter
+            errands (int): sets client errands attribute to the errands parameter
+        """
         self.name = name
         self.errands = errands
     
@@ -16,7 +22,7 @@ def random_errands():
     """Picks a random int from 1~4, weighted
 
     Returns:
-        int : Random number of errands for client
+        int : Random number of errands for the client
     """
     return choice([1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 4])
 
@@ -79,10 +85,6 @@ def time_passage(hour, closing_hour):
     return f"\nTotal number of errands: {total_errands}\nTotal number of clients: {len(total_clients)}"
 
 def main():
-    """Main function of the program, requests user input for hour and closing_hour. 
-    Prints the results of one full loop through the day.
-    Takes input for running again or not.
-    """
     print("Welcome to the mail office!")
     running = True
     opening_hour = 9
