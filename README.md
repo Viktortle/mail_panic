@@ -23,9 +23,11 @@ This project is made to simulate a day at a mail office, with a very punctual em
 ## Example 
 
 An example of a standard run of the program could start like this:
+
 ![image](https://user-images.githubusercontent.com/95741207/167119644-a40ef83b-08ca-4d97-980a-dfc7d888f54d.png)
 
 While it ends with showing the results similar to this:
+
 ![image](https://user-images.githubusercontent.com/95741207/167119775-40833b55-71f5-4078-b570-cc3401246405.png)
 
 ## To do
